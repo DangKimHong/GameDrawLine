@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="android.dkh.com.oopsproject.SigninActivity"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+
+    android:gravity="center">
+
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginBottom="50dp"-->
+        <!--android:src="@drawable/logosmall"-->
+        <!--android:id="@+id/image"-->
+        <!--/>-->
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your user name"
+        android:layout_marginBottom="30dp"/>
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:hint="Enter your password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        android:text="SIGN IN"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/tvDangky"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an account."
+        android:paddingTop="30dp"
+        android:textColor="#000"
+        android:textStyle="bold" />
+
+</LinearLayout>
