@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -61,6 +62,8 @@ public class PlayState extends State {
     public static List<Square> listSquare;
     public static List<Integer> listDraw;
 
+    public static List<Integer> listSquareDrawBot;
+
     @Override
     public void init() {
         soundclick = Assets.loadSound("soundclick.wav");
@@ -91,10 +94,12 @@ public class PlayState extends State {
         rectBack = new Rect(0, 990, 100, 1190);
         // Khoi tao du lieu cho mang hinh vuong
         listSquare = new ArrayList<Square>();
+        listSquareDrawBot = new ArrayList<Integer>();
         for (int i = 0; i < colQty - 1; i++) {
             for (int j = 0; j < rowQty - 1; j++) {
                 Square obj = new Square();
                 listSquare.add(obj);
+                listSquareDrawBot.add(0);
             }
         }
         //player = (player + 1) % 2;
@@ -235,7 +240,7 @@ public class PlayState extends State {
                                                 Board.points.get(rectPoint.get(1)).getRectPoint().centerY() - 90);
                                         drawline.add(new String(rectPoint.get(0) + "," + rectPoint.get(1)));
                                         if (checkSquare(g) == true) {
-                                            player = 1;
+                                            //player = 1;
                                         }
                                     } else {
                                         rectPoint.remove(1);
@@ -248,9 +253,8 @@ public class PlayState extends State {
                             Log.d("AAA", "Trung");
                         }
                         rectPoint.clear();
+                        player = 0;
                     }
-                    player = 0;
-                    tempPlayer = false;
                 } else if (player == 0) {
                     botGame(g);
                     player = 1;
@@ -297,7 +301,8 @@ public class PlayState extends State {
             j = i - 1;
             if (xA == colQty - 1) {
                 // mép phải
-                listSquare.get(j).setRightLine(true);
+                listSquare.get(j).setRightLine(true);//ở đây nè
+                listSquareDrawBot.set(j, listSquareDrawBot.get(j) + 1);
                 Log.d("BB", "J= " + j + ": " + listSquare.get(j).isLeftLine() + "-" +
                         listSquare.get(j).isRightLine() + "-" +
                         listSquare.get(j).isTopLine() + "-" +
@@ -310,6 +315,7 @@ public class PlayState extends State {
                 }
             } else if (xA == 0) {
                 listSquare.get(i).setLeftLine(true);
+                listSquareDrawBot.set(i, listSquareDrawBot.get(i) + 1);
                 Log.d("BB", "I= " + i + ": " + listSquare.get(i).isLeftLine() + "-" +
                         listSquare.get(i).isRightLine() + "-" +
                         listSquare.get(i).isTopLine() + "-" +
@@ -322,6 +328,7 @@ public class PlayState extends State {
                 }
             } else {
                 listSquare.get(i).setLeftLine(true);
+                listSquareDrawBot.set(i, listSquareDrawBot.get(i) + 1);
                 Log.d("BB", "I= " + i + ": " + listSquare.get(i).isLeftLine() + "-" +
                         listSquare.get(i).isRightLine() + "-" +
                         listSquare.get(i).isTopLine() + "-" +
@@ -333,6 +340,7 @@ public class PlayState extends State {
                     flag = true;
                 }
                 listSquare.get(j).setRightLine(true);
+                listSquareDrawBot.set(j, listSquareDrawBot.get(j) + 1);
                 Log.d("BB", "J= " + j + ": " + listSquare.get(j).isLeftLine() + "-" +
                         listSquare.get(j).isRightLine() + "-" +
                         listSquare.get(j).isTopLine() + "-" +
@@ -351,6 +359,7 @@ public class PlayState extends State {
 
             if (i >= 0 && i < listSquare.size() && j >= 0 && j < listSquare.size()) {
                 listSquare.get(i).setTopLine(true);
+                listSquareDrawBot.set(i, listSquareDrawBot.get(i) + 1);
                 Log.d("BB", "I= " + i + ": " + listSquare.get(i).isLeftLine() + "-" +
                         listSquare.get(i).isRightLine() + "-" +
                         listSquare.get(i).isTopLine() + "-" +
@@ -362,6 +371,7 @@ public class PlayState extends State {
                     flag = true;
                 }
                 listSquare.get(j).setBottomLine(true);
+                listSquareDrawBot.set(j, listSquareDrawBot.get(j) + 1);
                 Log.d("BB", "J= " + j + ": " + listSquare.get(j).isLeftLine() + "-" +
                         listSquare.get(j).isRightLine() + "-" +
                         listSquare.get(j).isTopLine() + "-" +
@@ -374,6 +384,7 @@ public class PlayState extends State {
                 }
             } else if (i >= listSquare.size()) {
                 listSquare.get(j).setBottomLine(true);
+                listSquareDrawBot.set(j, listSquareDrawBot.get(j) + 1);
                 Log.d("BB", "J= " + j + ": " + listSquare.get(j).isLeftLine() + "-" +
                         listSquare.get(j).isRightLine() + "-" +
                         listSquare.get(j).isTopLine() + "-" +
@@ -386,6 +397,7 @@ public class PlayState extends State {
                 }
             } else if (j < 0) {
                 listSquare.get(i).setTopLine(true);
+                listSquareDrawBot.set(i, listSquareDrawBot.get(i) + 1);
                 Log.d("BB", "I= " + i + ": " + listSquare.get(i).isLeftLine() + "-" +
                         listSquare.get(i).isRightLine() + "-" +
                         listSquare.get(i).isTopLine() + "-" +
@@ -618,7 +630,7 @@ public class PlayState extends State {
     }
 
     private void botDrawing(int a, Painter g) {
-        int x1, y1, x2, y2, point1, point2;
+        int point1, point2;
         ySquare = a / (colQty - 1);// hàng
         xSquare = a - (ySquare * (colQty - 1));// cột
         Log.d("AA", listSquare.size() + "list");
@@ -626,11 +638,11 @@ public class PlayState extends State {
         if (listSquare.get(a).checkLine() != 0) {
 
             if (listSquare.get(a).checkLine() == 1) {
-                x1 = x2 = xSquare;
-                y1 = ySquare;
-                y2 = ySquare + 1;
-                point1 = twoToOne(x1, y1);
-                point2 = twoToOne(x2, y2);
+                xA = xB = xSquare;
+                yA = ySquare;
+                yB = ySquare + 1;
+                point1 = twoToOne(xA, yA);
+                point2 = twoToOne(xB, yB);
                 if (checkSame(point1, point2)) {
                     //Log.d("AA", point1 + "-" + point2);
                     g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
@@ -638,16 +650,18 @@ public class PlayState extends State {
                             , Board.points.get(point2).getRectPoint().centerX() - 90
                             , Board.points.get(point2).getRectPoint().centerY() - 90);
                     drawline.add(new String(point1 + "," + point2));
-                    listSquare.get(a).setLeftLine(true);
+                    checkSquare(g);
                 }
+
+
             }
         } else if (listSquare.get(a).checkLine() == 2) {
-            x1 = xSquare;
-            x2 = xSquare + 1;
-            y1 = ySquare;
-            y2 = ySquare;
-            point1 = twoToOne(x1, y1);
-            point2 = twoToOne(x2, y2);
+            xA = xSquare;
+            xB = xSquare + 1;
+            yA = ySquare;
+            yB = ySquare;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
             if (checkSame(point1, point2)) {
                 //Log.d("AA", point1 + "-" + point2);
                 g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
@@ -655,19 +669,17 @@ public class PlayState extends State {
                         , Board.points.get(point2).getRectPoint().centerX() - 90
                         , Board.points.get(point2).getRectPoint().centerY() - 90);
                 drawline.add(new String(point1 + "," + point2));
-                listSquare.get(a).setTopLine(true);
+//                listSquare.get(a).setTopLine(true);
+                checkSquare(g);
             }
 
-            if (listSquare.get(a).isSquare()) {
-                drawRect(a, g);
-            }
 
         } else if (listSquare.get(a).checkLine() == 3) {
-            x1 = x2 = xSquare + 1;
-            y1 = ySquare;
-            y2 = ySquare + 1;
-            point1 = twoToOne(x1, y1);
-            point2 = twoToOne(x2, y2);
+            xA = xB = xSquare + 1;
+            yA = ySquare;
+            yB = ySquare + 1;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
             if (checkSame(point1, point2)) {
                 //Log.d("AA", point1 + "-" + point2);
                 g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
@@ -675,18 +687,17 @@ public class PlayState extends State {
                         , Board.points.get(point2).getRectPoint().centerX() - 90
                         , Board.points.get(point2).getRectPoint().centerY() - 90);
                 drawline.add(new String(point1 + "," + point2));
-                listSquare.get(a).setRightLine(true);
+//                listSquare.get(a).setRightLine(true);
+                checkSquare(g);
             }
 
-            if (listSquare.get(a).isSquare()) {
-                drawRect(a, g);
-            }
+
         } else if (listSquare.get(a).checkLine() == 4) {
-            x1 = xSquare + 1;
-            x2 = xSquare;
-            y1 = y2 = ySquare + 1;
-            point1 = twoToOne(x1, y1);
-            point2 = twoToOne(x2, y2);
+            xA = xSquare + 1;
+            xB = xSquare;
+            yA = yB = ySquare + 1;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
             if (checkSame(point1, point2)) {
                 //Log.d("AA", point1 + "-" + point2);
                 g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
@@ -694,14 +705,16 @@ public class PlayState extends State {
                         , Board.points.get(point2).getRectPoint().centerX() - 90
                         , Board.points.get(point2).getRectPoint().centerY() - 90);
                 drawline.add(new String(point1 + "," + point2));
-                listSquare.get(a).setBottomLine(true);
+//                listSquare.get(a).setBottomLine(true);
+                checkSquare(g);
             }
-            if (listSquare.get(a).isSquare()) {
-                drawRect(a, g);
-            }
+
         } else {
             Log.d("QQ", player + "player");
             drawRandom(g);
+        }
+        if (listSquare.get(a).isSquare()) {
+            drawRect(a, g);
         }
     }
 
@@ -713,37 +726,125 @@ public class PlayState extends State {
 
     private void drawRandom(Painter g) {
         int point1, point2;
-        Random rand = new Random();
-        do {
-            point1 = rand.nextInt(Board.points.size());
-            point2 = rand.nextInt(Board.points.size());
-            Log.d("EE", point1 + "," + point2);
+        int viTriHvItNhat = listSquareDrawBot.get(0);
+        for (int i = 1; i < listSquareDrawBot.size(); i++) {
+            if (listSquareDrawBot.get(viTriHvItNhat) > listSquareDrawBot.get(i)) {
+                viTriHvItNhat = i;
+            }
+        } // Tim vi tri hinh vuong it line nhat
+        Log.i("VTHV: ", viTriHvItNhat + "");
+        ySquare = viTriHvItNhat / (colQty - 1);// hàng
+        xSquare = viTriHvItNhat - (ySquare * (colQty - 1));// cột
+        // Ve line CON THIEU cua hinh vuong co vi tri viTriHvItNhat la xong!
+        if (!listSquare.get(viTriHvItNhat).isTopLine()) {
 
-        } while (!(checkSame(point1, point2)
-                && point1 != point2
-                && (point1 - point2) == 1
-                || (point1 - point2) == -1
-                || (point1 - point2) == 4
-                || (point1 - point2) == -4
-        ));
-        yA = point1 / (colQty);// hàng
-        xA = point1 - (yA * colQty);// cột
-        //Log.d("AA", xA + "- " + yA + "đây");
-        yB = point2 / (colQty);// hàng
-        xB = point2 - (yB * colQty);// cột
-        if ((xA == 3 && xB == 0)
-                || (xA == 0 && xB == 3)) {
-            Log.d("AA", xA + "- " + yA + "đâyyyy");
-            Log.d("AA", xB + "- " + yB + "đâyyyy");
-        } else {
+            xA = xSquare;
+            xB = xSquare + 1;
+            yA = ySquare;
+            yB = ySquare;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
+            if (checkSame(point1, point2)) {
+                //Log.d("AA", point1 + "-" + point2);
+                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                        , Board.points.get(point1).getRectPoint().centerY() - 90
+                        , Board.points.get(point2).getRectPoint().centerX() - 90
+                        , Board.points.get(point2).getRectPoint().centerY() - 90);
+                drawline.add(new String(point1 + "," + point2));
+//                listSquare.get(a).setTopLine(true);
+                checkSquare(g);
+            }
+            return;
+        }
+
+        if (!listSquare.get(viTriHvItNhat).isRightLine()) {
+            xA = xB = xSquare + 1;
+            yA = ySquare;
+            yB = ySquare + 1;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
+            if (checkSame(point1, point2)) {
+                //Log.d("AA", point1 + "-" + point2);
+                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                        , Board.points.get(point1).getRectPoint().centerY() - 90
+                        , Board.points.get(point2).getRectPoint().centerX() - 90
+                        , Board.points.get(point2).getRectPoint().centerY() - 90);
+                drawline.add(new String(point1 + "," + point2));
+//                listSquare.get(a).setRightLine(true);
+                checkSquare(g);
+            }
+            return;
+        }
+
+        if (!listSquare.get(viTriHvItNhat).isBottomLine()) {
+            xA = xSquare + 1;
+            xB = xSquare;
+            yA = yB = ySquare + 1;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
+            if (checkSame(point1, point2)) {
+                //Log.d("AA", point1 + "-" + point2);
+                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                        , Board.points.get(point1).getRectPoint().centerY() - 90
+                        , Board.points.get(point2).getRectPoint().centerX() - 90
+                        , Board.points.get(point2).getRectPoint().centerY() - 90);
+                drawline.add(new String(point1 + "," + point2));
+//                listSquare.get(a).setBottomLine(true);
+                checkSquare(g);
+            }
+            return;
+        }
+
+        if (!listSquare.get(viTriHvItNhat).isLeftLine()) {
+            xA = xB = xSquare;
+            yA = ySquare;
+            yB = ySquare + 1;
+            point1 = twoToOne(xA, yA);
+            point2 = twoToOne(xB, yB);
+
             g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
                     , Board.points.get(point1).getRectPoint().centerY() - 90
                     , Board.points.get(point2).getRectPoint().centerX() - 90
                     , Board.points.get(point2).getRectPoint().centerY() - 90);
             drawline.add(new String(point1 + "," + point2));
-            Log.d("ZZ", point1 + "-" + point2);
-            player = 1;
+            checkSquare(g);
+
+            return;
         }
+
+
+//        int point1, point2;
+//        Random rand = new Random();
+//        do {
+//            point1 = rand.nextInt(Board.points.size());
+//            point2 = rand.nextInt(Board.points.size());
+//
+//        } while (!(checkSame(point1, point2)
+//                && point1 != point2
+//                && (point1 - point2) == 1
+//                || (point1 - point2) == -1
+//                || (point1 - point2) == 4
+//                || (point1 - point2) == -4
+//        ));
+//        Log.d("EE", point1 + "," + point2);
+//        yA = point1 / (colQty);// hàng
+//        xA = point1 - (yA * colQty);// cột
+//        //Log.d("AA", xA + "- " + yA + "đây");
+//        yB = point2 / (colQty);// hàng
+//        xB = point2 - (yB * colQty);// cột
+//        Log.d("EE", "A (" + xA + "," + yA + ") - B(" + xB + ", " + yB + ")");
+//        if (!((xA != 3 && xB != 0)
+//                || (xA != 0 && xB != 3))) {
+//            Log.d("AA", xA + "- " + yA + "đâyyyy");
+//            Log.d("AA", xB + "- " + yB + "đâyyyy");
+//            Log.d("EE", point1 + "," + point2 + "-2");
+//            g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+//                    , Board.points.get(point1).getRectPoint().centerY() - 90
+//                    , Board.points.get(point2).getRectPoint().centerX() - 90
+//                    , Board.points.get(point2).getRectPoint().centerY() - 90);
+//            drawline.add(new String(point1 + "," + point2));
+//            Log.d("ZZ", point1 + "-" + point2);
+//        }
     }
 
     private Libes oneToTwo(int a, int b) {
