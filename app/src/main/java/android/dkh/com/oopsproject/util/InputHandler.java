@@ -1,4 +1,4 @@
-package android.dkh.com.oopsproject.until;
+package android.dkh.com.oopsproject.util;
 
 import android.dkh.com.oopsproject.GameState.State;
 import android.dkh.com.oopsproject.MainActivity;

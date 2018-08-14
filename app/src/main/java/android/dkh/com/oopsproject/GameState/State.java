@@ -2,7 +2,7 @@ package android.dkh.com.oopsproject.GameState;
 
 
 import android.dkh.com.oopsproject.MainActivity;
-import android.dkh.com.oopsproject.until.Painter;
+import android.dkh.com.oopsproject.util.Painter;
 import android.view.MotionEvent;
 
 /**

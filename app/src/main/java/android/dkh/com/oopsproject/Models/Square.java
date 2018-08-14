@@ -51,9 +51,28 @@ public class Square {
         this.topLine = topLine;
     }
 
-    public boolean isSquare(){
+    public boolean isSquare() {
         if (this.topLine && this.rightLine && this.bottomLine && this.leftLine)
             return true;
         return false;
+    }
+
+    public int checkLine() {
+        if (!this.leftLine && this.topLine && this.rightLine && this.bottomLine) {
+            return 1;
+        }
+
+        if (this.leftLine && !this.topLine && this.rightLine && this.bottomLine) {
+            return 2;
+        }
+
+        if (this.leftLine && this.topLine && !this.rightLine && this.bottomLine) {
+            return 3;
+        }
+
+        if (this.leftLine && this.topLine && this.rightLine && !this.bottomLine) {
+            return 4;
+        }
+        return 0;
     }
 }

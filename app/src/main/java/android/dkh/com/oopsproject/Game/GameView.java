@@ -2,10 +2,9 @@ package android.dkh.com.oopsproject.Game;
 
 import android.content.Context;
 import android.dkh.com.oopsproject.GameState.LoadMenuState;
-import android.dkh.com.oopsproject.GameState.LoadPlayState;
 import android.dkh.com.oopsproject.GameState.State;
-import android.dkh.com.oopsproject.until.InputHandler;
-import android.dkh.com.oopsproject.until.Painter;
+import android.dkh.com.oopsproject.util.InputHandler;
+import android.dkh.com.oopsproject.util.Painter;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -43,7 +42,7 @@ public class GameView extends SurfaceView implements Runnable {
             public void surfaceCreated(SurfaceHolder holder) {
                 initInput();
                 if(currentState == null) {
-                    setCurrentState(new LoadPlayState());
+                    setCurrentState(new LoadMenuState());
                 }
                 initGame();
             }

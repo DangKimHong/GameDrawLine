@@ -21,20 +21,27 @@ import java.io.InputStream;
  */
 
 public class Assets {
-    private static MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
 
     private static SoundPool soundPool;
 
     public static Bitmap playbackground;
     public static Bitmap bg;
     public static Bitmap btnplay;
-    public static Bitmap character;
-    public static Bitmap item1;
-    public static Bitmap item2;
-    public static Bitmap item3;
-    public static Bitmap enimy;
+    public static Bitmap btnpause;
+    public static Bitmap volume;
+    public static Bitmap mute;
     public static Bitmap gameover;
     public static Bitmap btncontinue;
+    public static Bitmap level1;
+    public static Bitmap level2;
+    public static Bitmap level3;
+    public static Bitmap playing;
+    public static Bitmap replay;
+    public static Bitmap next;
+    public static Bitmap back;
+    public static Bitmap btnplayer;
+    public static Bitmap btnbot;
 
     public static void onPause() {
         if(soundPool != null) {
@@ -156,7 +163,7 @@ public class Assets {
     }
 
     //Used to stream music without loading it into the memory
-    public static void playMusic(String fileName, boolean looping) {
+    public static void playMusic(String fileName, boolean looping) { // goi cai hàm nay nè
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }

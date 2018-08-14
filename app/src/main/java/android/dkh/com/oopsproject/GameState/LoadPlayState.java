@@ -1,8 +1,7 @@
 package android.dkh.com.oopsproject.GameState;
 
 import android.dkh.com.oopsproject.Game.Assets;
-import android.dkh.com.oopsproject.until.Painter;
-import android.graphics.Color;
+import android.dkh.com.oopsproject.util.Painter;
 import android.view.MotionEvent;
 
 /**
@@ -35,6 +34,12 @@ public class LoadPlayState extends State{
     @Override
     public void load() {
         Assets.playbackground = Assets.loadBitmap("background.png", true);
+        Assets.playing = Assets.loadBitmap("playing.png", true);
+        Assets.replay = Assets.loadBitmap("replay.png", true);
+        Assets.next = Assets.loadBitmap("next.png", true);
+        Assets.back = Assets.loadBitmap("back.png", true);
+        Assets.btnpause = Assets.loadBitmap("pause.png", true);
+
     }
 
     @Override

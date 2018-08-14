@@ -1,9 +1,5 @@
 package android.dkh.com.oopsproject.Models;
 
-import android.dkh.com.oopsproject.GameState.State;
-import android.dkh.com.oopsproject.until.Painter;
-import android.view.MotionEvent;
-
 /**
  * Created by MyPC on 27/06/2018.
  */

@@ -1,6 +1,5 @@
 package android.dkh.com.oopsproject.Models;
 
-import android.dkh.com.oopsproject.until.Painter;
 import android.graphics.Rect;
 
 /**

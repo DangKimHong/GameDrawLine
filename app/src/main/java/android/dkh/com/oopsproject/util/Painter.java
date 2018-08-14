@@ -1,4 +1,4 @@
-package android.dkh.com.oopsproject.until;
+package android.dkh.com.oopsproject.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -45,8 +45,16 @@ public class Painter {
     //draws a string at the specified location
     public void drawString(String str, int x, int y) {
         paint.setStyle(Paint.Style.FILL);
+        paint.setTextSize(40);
         canvas.drawText(str, x, y, paint);
     }
+    public void drawStringResult(String str, int x, int y) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setTextSize(50);
+        paint.setColor(Color.BLUE);
+        canvas.drawText(str, x, y, paint);
+    }
+
 
     public void drawLine(int x1, int y1, int x2, int y2 ){
         Paint p = new Paint();
@@ -136,6 +144,13 @@ public class Painter {
     }
 
     public void drawRecta(int x, int y, int width, int height) {
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(strokeWidth);
+        canvas.drawRect(x, y, x + width, y + height, paint);
+    }
+    public void drawRecta1(int x, int y, int width, int height) {
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
