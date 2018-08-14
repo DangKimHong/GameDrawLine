@@ -91,7 +91,7 @@ public class GameView extends SurfaceView implements Runnable {
             updateAndRender(deltaMillis);
 
             updateDurationMillis = (System.nanoTime() - beforeUpdateRender) / 1000000L;
-            sleepDurationMillis = Math.max(2, 40 - updateDurationMillis);
+            sleepDurationMillis = Math.max(2,40 - updateDurationMillis);
             try {
                 Thread.sleep(sleepDurationMillis);
             } catch (Exception e) {

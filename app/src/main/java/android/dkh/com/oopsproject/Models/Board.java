@@ -23,9 +23,6 @@ public class Board {
     private Rect rectBoard;
     List<Libes> lines;
 
-    public Board(int startX, int startY, int endX, int endY){
-        rectBoard = new Rect(startX, startY, startX + endX, startY + endY );
-    }
 
     public Board(int cellWidth, int cellHeight, int totalRowQty, int totalColQty, int startX, int startY) {
         points = new ArrayList<>();

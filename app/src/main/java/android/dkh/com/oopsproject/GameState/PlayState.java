@@ -38,8 +38,8 @@ public class PlayState extends State {
 
     private int temp;
     private boolean tempPlayer;
-    boolean isDraw;
-    private int player;
+    //boolean isDraw;
+    public static int player;
     public static int scoreA;
     public static int scoreB;
     public static int xA, yA, xB, yB;
@@ -71,12 +71,11 @@ public class PlayState extends State {
         //Log.i("AZ","h: " + height + " - w: " + width);
         temp = 0;
         tempPlayer = true;
-        isDraw = true;
         cellHeight = 200;//80;//200
         cellWidth = 200; //80;//200
         colQty = 4; //8;//4
         rowQty = 4;
-        player = 0;
+        player = 1;
 
         scoreA = 0;
         scoreB = 0;
@@ -98,7 +97,7 @@ public class PlayState extends State {
                 listSquare.add(obj);
             }
         }
-        player = (player + 1) % 2;
+        //player = (player + 1) % 2;
     }
 
     @Override
@@ -142,9 +141,6 @@ public class PlayState extends State {
                                 == Board.points.get(rectPoint.get(1)).getRectPoint().left
                                 || Board.points.get(rectPoint.get(0)).getRectPoint().top
                                 == Board.points.get(rectPoint.get(1)).getRectPoint().top) {
-                            //Log.d("AA", Board.points.get(rectPoint.get(0)).getRectPoint().left
-                            // + "-" + Board.points.get(rectPoint.get(1)).getRectPoint().left
-                            // + " - " + pointtempt.get(rectPoint.get(1)).getX1());
                             if (rectPoint.get(0) != rectPoint.get(1)) {
                                 if (rectPoint.get(0) - rectPoint.get(1) == 1
                                         || rectPoint.get(0) - rectPoint.get(1) == 4
@@ -196,72 +192,70 @@ public class PlayState extends State {
                 }
             }
         } else {
-//            if (isGameOver() == false) {
-//            if (player == 1) {
-//                if (rectPoint.size() == 2) {
-//
-////                    for (int i = 0; i < drawline.size(); i++) {
-////                        String[] split = drawline.get(i).split(",");
-////                        Log.d("AAA", split[0].trim() + "-" + split[1].trim());
-////                        if ((split[0].trim().equals(rectPoint.get(0) + "")
-////                                || split[0].trim().equals(rectPoint.get(1) + ""))
-////                                && (split[1].trim().equals(rectPoint.get(0) + "")
-////                                || split[1].trim().equals(rectPoint.get(1) + ""))) {
-////                            isDraw = false;
-////                            break;
-////                        }
-////                    }
-//                    if (checkSame(rectPoint.get(0), rectPoint.get(1))) {
-//                        if (Board.points.get(rectPoint.get(0)).getRectPoint().left
-//                                == Board.points.get(rectPoint.get(1)).getRectPoint().left
-//                                || Board.points.get(rectPoint.get(0)).getRectPoint().top
-//                                == Board.points.get(rectPoint.get(1)).getRectPoint().top) {
-//                            //Log.d("AA", Board.points.get(rectPoint.get(0)).getRectPoint().left
-//                            // + "-" + Board.points.get(rectPoint.get(1)).getRectPoint().left
-//                            // + " - " + pointtempt.get(rectPoint.get(1)).getX1());
-//                            if (rectPoint.get(0) != rectPoint.get(1)) {
-//                                if (rectPoint.get(0) - rectPoint.get(1) == 1
-//                                        || rectPoint.get(0) - rectPoint.get(1) == 4
-//                                        || rectPoint.get(0) - rectPoint.get(1) == -1
-//                                        || rectPoint.get(0) - rectPoint.get(1) == -4) {
-//
-//                                    //convert
-//                                    yA = rectPoint.get(0) / (colQty);// hàng
-//                                    xA = rectPoint.get(0) - (yA * colQty);// cột
-//                                    Log.d("AA", xA + "- " + yA);
-//                                    yB = rectPoint.get(1) / (colQty);// hàng
-//                                    xB = rectPoint.get(1) - (yB * colQty);// cột
-//                                    Log.d("AA", xB + "- " + yB);
-//                                    //oneToTwo(rectPoint.get(0), rectPoint.get(1));
-//
-//                                    g.drawLine1(Board.points.get(rectPoint.get(0)).getRectPoint().centerX() - 90,
-//                                            Board.points.get(rectPoint.get(0)).getRectPoint().centerY() - 90,
-//                                            Board.points.get(rectPoint.get(1)).getRectPoint().centerX() - 90,
-//                                            Board.points.get(rectPoint.get(1)).getRectPoint().centerY() - 90);
-//                                    drawline.add(new String(rectPoint.get(0) + "," + rectPoint.get(1)));
-//                                    if (checkSquare(g) == true) {
-//                                        player = 1;
-//                                    }
-//                                } else {
-//                                    rectPoint.remove(1);
-//                                }
-//                            } else {
-//                                rectPoint.remove(1);
-//                            }
+            if (isGameOver() == false) {
+                if (player == 1) {
+                    if (rectPoint.size() == 2) {
+//                    for (int i = 0; i < drawline.size(); i++) {
+//                        String[] split = drawline.get(i).split(",");
+//                        Log.d("AAA", split[0].trim() + "-" + split[1].trim());
+//                        if ((split[0].trim().equals(rectPoint.get(0) + "")
+//                                || split[0].trim().equals(rectPoint.get(1) + ""))
+//                                && (split[1].trim().equals(rectPoint.get(0) + "")
+//                                || split[1].trim().equals(rectPoint.get(1) + ""))) {
+//                            isDraw = false;
+//                            break;
 //                        }
-//                    } else {
-//                        Log.d("AAA", "Trung");
 //                    }
-//                    rectPoint.clear();
-//                }
-//                player = 0;
-//                tempPlayer = false;
-//            } else if (player == 0 && !tempPlayer) {
-//                //botGame(g);
-//                player = 1;
-//            }
-//        }
-            Log.d("BBB", "Bot");
+                        if (checkSame(rectPoint.get(0), rectPoint.get(1))) {
+                            if (Board.points.get(rectPoint.get(0)).getRectPoint().left
+                                    == Board.points.get(rectPoint.get(1)).getRectPoint().left
+                                    || Board.points.get(rectPoint.get(0)).getRectPoint().top
+                                    == Board.points.get(rectPoint.get(1)).getRectPoint().top) {
+                                //Log.d("AA", Board.points.get(rectPoint.get(0)).getRectPoint().left
+                                // + "-" + Board.points.get(rectPoint.get(1)).getRectPoint().left
+                                // + " - " + pointtempt.get(rectPoint.get(1)).getX1());
+                                if (rectPoint.get(0) != rectPoint.get(1)) {
+                                    if (rectPoint.get(0) - rectPoint.get(1) == 1
+                                            || rectPoint.get(0) - rectPoint.get(1) == 4
+                                            || rectPoint.get(0) - rectPoint.get(1) == -1
+                                            || rectPoint.get(0) - rectPoint.get(1) == -4) {
+
+                                        //convert
+                                        yA = rectPoint.get(0) / (colQty);// hàng
+                                        xA = rectPoint.get(0) - (yA * colQty);// cột
+                                        Log.d("AA", xA + "- " + yA);
+                                        yB = rectPoint.get(1) / (colQty);// hàng
+                                        xB = rectPoint.get(1) - (yB * colQty);// cột
+                                        Log.d("AA", xB + "- " + yB);
+                                        //oneToTwo(rectPoint.get(0), rectPoint.get(1));
+
+                                        g.drawLine1(Board.points.get(rectPoint.get(0)).getRectPoint().centerX() - 90,
+                                                Board.points.get(rectPoint.get(0)).getRectPoint().centerY() - 90,
+                                                Board.points.get(rectPoint.get(1)).getRectPoint().centerX() - 90,
+                                                Board.points.get(rectPoint.get(1)).getRectPoint().centerY() - 90);
+                                        drawline.add(new String(rectPoint.get(0) + "," + rectPoint.get(1)));
+                                        if (checkSquare(g) == true) {
+                                            player = 1;
+                                        }
+                                    } else {
+                                        rectPoint.remove(1);
+                                    }
+                                } else {
+                                    rectPoint.remove(1);
+                                }
+                            }
+                        } else {
+                            Log.d("AAA", "Trung");
+                        }
+                        rectPoint.clear();
+                    }
+                    player = 0;
+                    tempPlayer = false;
+                } else if (player == 0) {
+                    botGame(g);
+                    player = 1;
+                }
+            }
         }
     }
 
@@ -446,282 +440,270 @@ public class PlayState extends State {
         return false;
     }
 
-//    private void botGame(Painter g) {
-//        int minValue;
-//        int i, j;
-//        Log.d("CC", "Code đến đây rồi nè!" + xA + "-" + xB);
-//        if (xA == xB) {
-//            // truong hop duong doc
-//            minValue = minValue(yA, yB);
-//            i = (minValue * (PlayState.colQty - 1)) + xA;
-//            j = i - 1;
-//
-//            if (xA == colQty - 1) {
-//                botDrawing(j, g);
-//                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
-//                        + listSquare.get(j).isTopLine() + "-"
-//                        + listSquare.get(j).isRightLine() + "-"
-//                        + listSquare.get(j).isBottomLine());
-//            } else if (xA == 0) {
-//                botDrawing(i, g);
-//                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
-//                        + listSquare.get(i).isTopLine() + "-"
-//                        + listSquare.get(i).isRightLine() + "-"
-//                        + listSquare.get(i).isBottomLine());
-//            } else {
-//                botDrawing(i, g);
-//                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
-//                        + listSquare.get(i).isTopLine() + "-"
-//                        + listSquare.get(i).isRightLine() + "-"
-//                        + listSquare.get(i).isBottomLine());
-//                botDrawing(j, g);
-//                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
-//                        + listSquare.get(j).isTopLine() + "-"
-//                        + listSquare.get(j).isRightLine() + "-"
-//                        + listSquare.get(j).isBottomLine());
-////                if (listSquare.get(i).checkLine() != 0) {
-////                    // vẽ line còn lại
-////                    if (listSquare.get(i).checkLine() == 1) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 2) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 3) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 4) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                }
-////                if (listSquare.get(j).checkLine() != 0) {
-////                    //vẽ line còn lại
-////                    if (listSquare.get(j).checkLine() == 1) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 2) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 3) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 4) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                }
-//            }
-//        } else if (yA == yB) {
-//            minValue = minValue(xA, xB);
-//            i = yA * (colQty - 1) + minValue;
-//            j = (yA - 1) * (colQty - 1) + minValue;
-//
-//            if (i >= 0 && i < listSquare.size() && j >= 0 && j < listSquare.size()) {
-//                botDrawing(i, g);
-//                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
-//                        + listSquare.get(i).isTopLine() + "-"
-//                        + listSquare.get(i).isRightLine() + "-"
-//                        + listSquare.get(i).isBottomLine());
-//                botDrawing(j, g);
-//                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
-//                        + listSquare.get(j).isTopLine() + "-"
-//                        + listSquare.get(j).isRightLine() + "-"
-//                        + listSquare.get(j).isBottomLine());
-////                if (listSquare.get(i).checkLine() != 0) {
-////                    // vẽ line còn lại
-////                    if (listSquare.get(i).checkLine() == 1) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 2) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 3) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 4) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                }
-////                if (listSquare.get(j).checkLine() != 0) {
-////                    if (listSquare.get(j).checkLine() == 1) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 2) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 3) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 4) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                }
-//            } else if (i >= listSquare.size()) {
-//                botDrawing(j, g);
-//                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
-//                        + listSquare.get(j).isTopLine() + "-"
-//                        + listSquare.get(j).isRightLine() + "-"
-//                        + listSquare.get(j).isBottomLine());
-////                if (listSquare.get(j).checkLine() != 0) {
-////                    if (listSquare.get(j).checkLine() == 1) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 2) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 3) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(j).checkLine() == 4) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(j).setBottomLine(true);
-////                    }
-////                }
-//            } else if (j < 0) {
-//                botDrawing(i, g);
-//                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
-//                        + listSquare.get(i).isTopLine() + "-"
-//                        + listSquare.get(i).isRightLine() + "-"
-//                        + listSquare.get(i).isBottomLine());
-////                if (listSquare.get(i).checkLine() != 0) {
-////                    // vẽ line còn lại
-////                    if (listSquare.get(i).checkLine() == 1) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 2) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 3) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                    if (listSquare.get(i).checkLine() == 4) {
-////                        Log.d("CC", "Vẽ line");
-////                        listSquare.get(i).setBottomLine(true);
-////                    }
-////                }
-//            }
-//        }
-//    }
+    private void botGame(Painter g) {
+        int minValue;
+        int i, j;
+        if (xA == xB) {
+            // truong hop duong doc
+            minValue = minValue(yA, yB);
+            i = (minValue * (PlayState.colQty - 1)) + xA;
+            j = i - 1;
 
-//    private void botDrawing(int a, Painter g) {
-//        int x1, y1, x2, y2, point1, point2;
-//        ySquare = a / (colQty - 1);// hàng
-//        xSquare = a - (ySquare * (colQty - 1));// cột
-//        Log.d("AA", listSquare.size() + "list");
-//        //Log.d("AAA", "xSquare =" + xSquare + "ySquare= " + ySquare);
-//        if (listSquare.get(a).checkLine() != 0) {
-//
-//
-//            if (listSquare.get(a).checkLine() == 1) {
-//                x1 = x2 = xSquare;
-//                y1 = ySquare;
-//                y2 = ySquare + 1;
-//                point1 = twoToOne(x1, y1);
-//                point2 = twoToOne(x2, y2);
-//                if (checkSame(point1, point2)) {
-//                    //Log.d("AA", point1 + "-" + point2);
-//                    g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
-//                            , Board.points.get(point1).getRectPoint().centerY() - 90
-//                            , Board.points.get(point2).getRectPoint().centerX() - 90
-//                            , Board.points.get(point2).getRectPoint().centerY() - 90);
-//                    drawline.add(new String(point1 + "," + point2));
-//                    listSquare.get(a).setLeftLine(true);
+            if (xA == colQty - 1) {
+                botDrawing(j, g);
+                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
+                        + listSquare.get(j).isTopLine() + "-"
+                        + listSquare.get(j).isRightLine() + "-"
+                        + listSquare.get(j).isBottomLine());
+            } else if (xA == 0) {
+                botDrawing(i, g);
+                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
+                        + listSquare.get(i).isTopLine() + "-"
+                        + listSquare.get(i).isRightLine() + "-"
+                        + listSquare.get(i).isBottomLine());
+            } else {
+                botDrawing(i, g);
+                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
+                        + listSquare.get(i).isTopLine() + "-"
+                        + listSquare.get(i).isRightLine() + "-"
+                        + listSquare.get(i).isBottomLine());
+                botDrawing(j, g);
+                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
+                        + listSquare.get(j).isTopLine() + "-"
+                        + listSquare.get(j).isRightLine() + "-"
+                        + listSquare.get(j).isBottomLine());
+//                if (listSquare.get(i).checkLine() != 0) {
+//                    // vẽ line còn lại
+//                    if (listSquare.get(i).checkLine() == 1) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 2) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 3) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 4) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
 //                }
-//            } else {
-//                drawRandom(g);
-//            }
-//        }
-//        if (listSquare.get(a).checkLine() == 2) {
-//            x1 = xSquare;
-//            x2 = xSquare + 1;
-//            y1 = ySquare;
-//            y2 = ySquare;
-//            point1 = twoToOne(x1, y1);
-//            point2 = twoToOne(x2, y2);
-//            if (checkSame(point1, point2)) {
-//                //Log.d("AA", point1 + "-" + point2);
-//                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
-//                        , Board.points.get(point1).getRectPoint().centerY() - 90
-//                        , Board.points.get(point2).getRectPoint().centerX() - 90
-//                        , Board.points.get(point2).getRectPoint().centerY() - 90);
-//                drawline.add(new String(point1 + "," + point2));
-//                listSquare.get(a).setTopLine(true);
-//            }
-//
-//            if (listSquare.get(a).isSquare()) {
-//                drawRect(a, g);
-//            }
-//        } else {
-//            drawRandom(g);
-//        }
-//        if (listSquare.get(a).checkLine() == 3) {
-//            x1 = x2 = xSquare + 1;
-//            y1 = ySquare;
-//            y2 = ySquare + 1;
-//            point1 = twoToOne(x1, y1);
-//            point2 = twoToOne(x2, y2);
-//            if (checkSame(point1, point2)) {
-//                //Log.d("AA", point1 + "-" + point2);
-//                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
-//                        , Board.points.get(point1).getRectPoint().centerY() - 90
-//                        , Board.points.get(point2).getRectPoint().centerX() - 90
-//                        , Board.points.get(point2).getRectPoint().centerY() - 90);
-//                drawline.add(new String(point1 + "," + point2));
-//                listSquare.get(a).setRightLine(true);
-//            }
-//
-//            if (listSquare.get(a).isSquare()) {
-//                drawRect(a, g);
-//            }
-//
-//        } else {
-//            drawRandom(g);
-//        }
-//        if (listSquare.get(a).checkLine() == 4) {
-//            x1 = xSquare + 1;
-//            x2 = xSquare;
-//            y1 = y2 = ySquare + 1;
-//            point1 = twoToOne(x1, y1);
-//            point2 = twoToOne(x2, y2);
-//            if (checkSame(point1, point2)) {
-//                //Log.d("AA", point1 + "-" + point2);
-//                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
-//                        , Board.points.get(point1).getRectPoint().centerY() - 90
-//                        , Board.points.get(point2).getRectPoint().centerX() - 90
-//                        , Board.points.get(point2).getRectPoint().centerY() - 90);
-//                drawline.add(new String(point1 + "," + point2));
-//                listSquare.get(a).setBottomLine(true);
-//            }
-//
-//            if (listSquare.get(a).isSquare()) {
-//                drawRect(a, g);
-//            }
-//
-//        } else {
-//            drawRandom(g);
-//        }
-//    }
+//                if (listSquare.get(j).checkLine() != 0) {
+//                    //vẽ line còn lại
+//                    if (listSquare.get(j).checkLine() == 1) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 2) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 3) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 4) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                }
+            }
+        } else if (yA == yB) {
+            minValue = minValue(xA, xB);
+            i = yA * (colQty - 1) + minValue;
+            j = (yA - 1) * (colQty - 1) + minValue;
+
+            if (i >= 0 && i < listSquare.size() && j >= 0 && j < listSquare.size()) {
+                botDrawing(i, g);
+                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
+                        + listSquare.get(i).isTopLine() + "-"
+                        + listSquare.get(i).isRightLine() + "-"
+                        + listSquare.get(i).isBottomLine());
+                botDrawing(j, g);
+                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
+                        + listSquare.get(j).isTopLine() + "-"
+                        + listSquare.get(j).isRightLine() + "-"
+                        + listSquare.get(j).isBottomLine());
+//                if (listSquare.get(i).checkLine() != 0) {
+//                    // vẽ line còn lại
+//                    if (listSquare.get(i).checkLine() == 1) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 2) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 3) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 4) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                }
+//                if (listSquare.get(j).checkLine() != 0) {
+//                    if (listSquare.get(j).checkLine() == 1) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 2) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 3) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 4) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                }
+            } else if (i >= listSquare.size()) {
+                botDrawing(j, g);
+                Log.d("BB", listSquare.get(j).isLeftLine() + "-"
+                        + listSquare.get(j).isTopLine() + "-"
+                        + listSquare.get(j).isRightLine() + "-"
+                        + listSquare.get(j).isBottomLine());
+//                if (listSquare.get(j).checkLine() != 0) {
+//                    if (listSquare.get(j).checkLine() == 1) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 2) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 3) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(j).checkLine() == 4) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(j).setBottomLine(true);
+//                    }
+//                }
+            } else if (j < 0) {
+                botDrawing(i, g);
+                Log.d("BB", listSquare.get(i).isLeftLine() + "-"
+                        + listSquare.get(i).isTopLine() + "-"
+                        + listSquare.get(i).isRightLine() + "-"
+                        + listSquare.get(i).isBottomLine());
+//                if (listSquare.get(i).checkLine() != 0) {
+//                    // vẽ line còn lại
+//                    if (listSquare.get(i).checkLine() == 1) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 2) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 3) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                    if (listSquare.get(i).checkLine() == 4) {
+//                        Log.d("CC", "Vẽ line");
+//                        listSquare.get(i).setBottomLine(true);
+//                    }
+//                }
+            }
+        }
+    }
+
+    private void botDrawing(int a, Painter g) {
+        int x1, y1, x2, y2, point1, point2;
+        ySquare = a / (colQty - 1);// hàng
+        xSquare = a - (ySquare * (colQty - 1));// cột
+        Log.d("AA", listSquare.size() + "list");
+        //Log.d("AAA", "xSquare =" + xSquare + "ySquare= " + ySquare);
+        if (listSquare.get(a).checkLine() != 0) {
+
+            if (listSquare.get(a).checkLine() == 1) {
+                x1 = x2 = xSquare;
+                y1 = ySquare;
+                y2 = ySquare + 1;
+                point1 = twoToOne(x1, y1);
+                point2 = twoToOne(x2, y2);
+                if (checkSame(point1, point2)) {
+                    //Log.d("AA", point1 + "-" + point2);
+                    g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                            , Board.points.get(point1).getRectPoint().centerY() - 90
+                            , Board.points.get(point2).getRectPoint().centerX() - 90
+                            , Board.points.get(point2).getRectPoint().centerY() - 90);
+                    drawline.add(new String(point1 + "," + point2));
+                    listSquare.get(a).setLeftLine(true);
+                }
+            }
+        } else if (listSquare.get(a).checkLine() == 2) {
+            x1 = xSquare;
+            x2 = xSquare + 1;
+            y1 = ySquare;
+            y2 = ySquare;
+            point1 = twoToOne(x1, y1);
+            point2 = twoToOne(x2, y2);
+            if (checkSame(point1, point2)) {
+                //Log.d("AA", point1 + "-" + point2);
+                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                        , Board.points.get(point1).getRectPoint().centerY() - 90
+                        , Board.points.get(point2).getRectPoint().centerX() - 90
+                        , Board.points.get(point2).getRectPoint().centerY() - 90);
+                drawline.add(new String(point1 + "," + point2));
+                listSquare.get(a).setTopLine(true);
+            }
+
+            if (listSquare.get(a).isSquare()) {
+                drawRect(a, g);
+            }
+
+        } else if (listSquare.get(a).checkLine() == 3) {
+            x1 = x2 = xSquare + 1;
+            y1 = ySquare;
+            y2 = ySquare + 1;
+            point1 = twoToOne(x1, y1);
+            point2 = twoToOne(x2, y2);
+            if (checkSame(point1, point2)) {
+                //Log.d("AA", point1 + "-" + point2);
+                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                        , Board.points.get(point1).getRectPoint().centerY() - 90
+                        , Board.points.get(point2).getRectPoint().centerX() - 90
+                        , Board.points.get(point2).getRectPoint().centerY() - 90);
+                drawline.add(new String(point1 + "," + point2));
+                listSquare.get(a).setRightLine(true);
+            }
+
+            if (listSquare.get(a).isSquare()) {
+                drawRect(a, g);
+            }
+        } else if (listSquare.get(a).checkLine() == 4) {
+            x1 = xSquare + 1;
+            x2 = xSquare;
+            y1 = y2 = ySquare + 1;
+            point1 = twoToOne(x1, y1);
+            point2 = twoToOne(x2, y2);
+            if (checkSame(point1, point2)) {
+                //Log.d("AA", point1 + "-" + point2);
+                g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                        , Board.points.get(point1).getRectPoint().centerY() - 90
+                        , Board.points.get(point2).getRectPoint().centerX() - 90
+                        , Board.points.get(point2).getRectPoint().centerY() - 90);
+                drawline.add(new String(point1 + "," + point2));
+                listSquare.get(a).setBottomLine(true);
+            }
+            if (listSquare.get(a).isSquare()) {
+                drawRect(a, g);
+            }
+        } else {
+            Log.d("QQ", player + "player");
+            drawRandom(g);
+        }
+    }
 
     private int twoToOne(int x, int y) {
         int a = 0;
@@ -729,39 +711,40 @@ public class PlayState extends State {
         return a;
     }
 
-//    private void drawRandom(Painter g) {
-//        int point1, point2;
-//        Random rand = new Random();
-//        do {
-//            point1 = rand.nextInt(Board.points.size()-1)+1;
-//            point2 = rand.nextInt(Board.points.size()-1)+1;
-//            Log.d("EE", point1 + "," + point2);
-//            yA = point1 / (colQty);// hàng
-//            xA = point1 - (yA * colQty);// cột
-//            //Log.d("AA", xA + "- " + yA + "đây");
-//            yB = point2 / (colQty);// hàng
-//            xB = point2 - (yB * colQty);// cột
-//        } while (checkSame(point1, point2)
-//                && point1 != point2
-//                && (point1 - point2) == 1
-//                || (point1 - point2) == -1
-//                || (point1 - point2) == 4
-//                || (point1 - point2) == -4
-//                );
-////            if ((xA == 3 && xB == 0)
-////                    || (xA == 0 && xB == 3)) {
-////                Log.d("AA", xA + "- " + yA + "đâyyyy");
-////                Log.d("AA", xB + "- " + yB + "đâyyyy");
-////            } else {
-//        Log.d("AA", isDraw + "");
-//        g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
-//                , Board.points.get(point1).getRectPoint().centerY() - 90
-//                , Board.points.get(point2).getRectPoint().centerX() - 90
-//                , Board.points.get(point2).getRectPoint().centerY() - 90);
-//        drawline.add(new String(point1 + "," + point2));
-//        Log.d("ZZ", point1 + "-" + point2);
-//    }
+    private void drawRandom(Painter g) {
+        int point1, point2;
+        Random rand = new Random();
+        do {
+            point1 = rand.nextInt(Board.points.size());
+            point2 = rand.nextInt(Board.points.size());
+            Log.d("EE", point1 + "," + point2);
 
+        } while (!(checkSame(point1, point2)
+                && point1 != point2
+                && (point1 - point2) == 1
+                || (point1 - point2) == -1
+                || (point1 - point2) == 4
+                || (point1 - point2) == -4
+        ));
+        yA = point1 / (colQty);// hàng
+        xA = point1 - (yA * colQty);// cột
+        //Log.d("AA", xA + "- " + yA + "đây");
+        yB = point2 / (colQty);// hàng
+        xB = point2 - (yB * colQty);// cột
+        if ((xA == 3 && xB == 0)
+                || (xA == 0 && xB == 3)) {
+            Log.d("AA", xA + "- " + yA + "đâyyyy");
+            Log.d("AA", xB + "- " + yB + "đâyyyy");
+        } else {
+            g.drawLine(Board.points.get(point1).getRectPoint().centerX() - 90
+                    , Board.points.get(point1).getRectPoint().centerY() - 90
+                    , Board.points.get(point2).getRectPoint().centerX() - 90
+                    , Board.points.get(point2).getRectPoint().centerY() - 90);
+            drawline.add(new String(point1 + "," + point2));
+            Log.d("ZZ", point1 + "-" + point2);
+            player = 1;
+        }
+    }
 
     private Libes oneToTwo(int a, int b) {
         Libes line = new Libes();
@@ -788,7 +771,6 @@ public class PlayState extends State {
                     && (split[1].trim().equals(a + "")
                     || split[1].trim().equals(b + ""))) {
                 isDraw = false;
-
                 break;
             }
         }
